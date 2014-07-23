@@ -1,0 +1,35 @@
+【mysql】
+1、mkdir -p /home/users/yangjun03/webRoot/lamp
+2、./configure --prefix=/home/users/yangjun03/webRoot/lamp/mysql --with-charset=utf8 --with-extra-charsets=all --enable-thread-safe-client --localstatedir=/home/users/yangjun03/webRoot/lamp/mysql/data --with-unix-socket-path=/home/users/yangjun03/webRoot/lamp/mysql/mysql.sock 
+3、make && make install
+4、cp ./share/mysql/my-medium.cnf my.cnf
+5、./bin/mysql_install_db
+6、vi my.cnf
+7、cp -v ./share/mysql/mysql.server bin/
+8、chmod +x ./bin/mysql.server
+9、./bin/mysql.server start
+10、./bin/mysqladmin -u root password Admin@123
+11、mysql -uroot -p
+12、GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
+13、FLUSH PRIVILEGES;
+
+
+【apache】
+1、mkdir -p /home/users/yangjun03/webRoot/lamp
+2、./configure --prefix=/home/users/yangjun03/webRoot/lamp/apache --with-included-apr --enable-so --enable-deflate=shared --enable-expires=shared --enable-rewrite=shared --enable-static-support
+3、make && make install
+4、http.cnf端口修改
+
+【php】
+1、mkdir -p /home/users/yangjun03/webRoot/lamp
+2、./configure --with-mysql=/home/users/yangjun03/webRoot/lamp/mysql --with-mysql-sock=/home/users/yangjun03/webRoot/lamp/mysql --with-apxs2=/home/users/yangjun03/webRoot/lamp/apache/bin/apxs --prefix=/home/users/yangjun03/webRoot/lamp/php --bindir=/home/users/yangjun03/webRoot/lamp/php/bin --mandir=/home/users/yangjun03/webRoot/lamp/php/man --with-config-file-path=/home/users/yangjun03/webRoot/lamp/php --disable-cli --with-pcre-regex --with-zlib --enable-bcmath --enable-calendar --enable-ctype --enable-dba --with-regex --enable-xml --enable-wddx --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --enable-shmop --enable-session --with-ncurses --with-mime-magic --enable-mbstring --enable-mbregex --with-iconv --with-libmbfl --with-pcre=/home/users/yangjun03/webRoot/lamp/pcre
+3、make && make install
+4、make clean 清除上次编译残留信息
+5、make && make install
+6、cp ./lamp/tmp/php-5.2.9/php.ini-recommended ./lamp/php/
+7、apache文件添加:AddType application/x-httpd-php  .php
+8、PHPIniDir  /home/users/yangjun03/webRoot/lamp/php/php.ini
+
+【mod_wsgi】
+1、./configure --with-apxs=/home/users/yangjun03/webRoot/lamp/apache/bin/apxs --with-python=/home/users/yangjun03/.jumbo/bin/python
+2、make && make install
